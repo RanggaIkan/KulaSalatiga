@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sugeng Rawuh ing Salatiga</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Cinzel & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- ================= CUSTOM CSS KHUSUS INDEX.HTML ================= -->
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #07130c;
+    }
+
+    .font-heritage {
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.04em;
+    }
+
+    /* Video Background Fullscreen Jernih */
+    .video-bg {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      z-index: -2;
+      filter: brightness(0.85) contrast(1.05);
+    }
+
+    /* Overlay Halus & Hangat */
+    .video-overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(13, 40, 24, 0.25) 0%, rgba(5, 15, 10, 0.7) 100%);
+      z-index: -1;
+    }
+
+    /* Glow Lembut Emas */
+    .gold-glow {
+      color: #faedcd;
+      text-shadow: 0 0 25px rgba(212, 163, 115, 0.6), 0 0 50px rgba(212, 163, 115, 0.3);
+    }
+
+    /* Card Sambutan Glassmorphism */
+    .welcome-card {
+      background: rgba(13, 40, 24, 0.65);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1.5px solid rgba(212, 163, 115, 0.45);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      animation: cardEntrance 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes cardEntrance {
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* ================= ANIMASI JUDUL SINEMATIK (BLUR TO FOCUS & SLOW DROP) ================= */
+    .title-reveal {
+      opacity: 0;
+      filter: blur(14px);
+      transform: translateY(-18px);
+      animation: revealTitle 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+    }
+
+    @keyframes revealTitle {
+      0% {
+        opacity: 0;
+        filter: blur(14px);
+        transform: translateY(-18px);
+      }
+      50% {
+        opacity: 0.85;
+      }
+      100% {
+        opacity: 1;
+        filter: blur(0px);
+        transform: translateY(0px);
+      }
+    }
+
+    /* Kursor Ketik Emas */
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.1em;
+      background-color: #d4a373;
+      margin-left: 4px;
+      vertical-align: middle;
+      animation: blink 0.8s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Tombol Emas Shimmer */
+    .btn-gold {
+      background: linear-gradient(135deg, #d4a373 0%, #faedcd 50%, #c28e5c 100%);
+      color: #07130c;
+      box-shadow: 0 8px 25px rgba(212, 163, 115, 0.35);
+      transition: all 0.3s ease;
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 12px 30px rgba(212, 163, 115, 0.5);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+  <!-- ================= VIDEO BACKGROUND ================= -->
+  <video autoplay muted loop playsinline class="video-bg">
+    <source src="background.mp4" type="video/mp4" />
+  </video>
+  <div class="video-overlay"></div>
+
+  <!-- ================= KONTEN SAMBUTAN ================= -->
+  <main class="welcome-card max-w-2xl w-full p-8 sm:p-12 rounded-3xl text-center relative z-10">
+    
+    <!-- Ikon Daun Tradisional -->
+    <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-[#1b4332] to-[#07130c] border border-[#d4a373]/80 flex items-center justify-center text-3xl shadow-lg">
+      🌿
+    </div>
+
+    <!-- Badge Etnik -->
+    <div class="inline-flex items-center gap-2 bg-[#07130c]/80 border border-[#d4a373]/50 text-[#d4a373] text-xs font-bold px-4 py-1.5 rounded-full mb-4 uppercase tracking-widest">
+      <span>❖</span>
+      <span>Kutha Salatiga • Jawa Tengah</span>
+      <span>❖</span>
+    </div>
+
+    <!-- Judul Sambutan Utama (Dengan Animasi Focus Reveal dari Atas) -->
+    <h1 class="title-reveal text-3xl sm:text-5xl font-black font-heritage gold-glow leading-tight">
+      "Sugeng Rawuh & Monggo Pinarak"
+    </h1>
+
+    <!-- Typing Subtext Container -->
+    <div class="min-h-[56px] sm:min-h-[48px] flex items-center justify-center mt-4">
+      <p class="text-sm sm:text-base text-[#faedcd]/90 leading-relaxed font-medium">
+        <span id="typed-text"></span><span class="typing-cursor"></span>
+      </p>
+    </div>
+
+    <!-- TOMBOL NEXT KE KATALOG -->
+    <div class="mt-8">
+      <a href="salatiga.html" class="btn-gold inline-flex items-center gap-3 font-black text-sm sm:text-base px-8 py-4 rounded-2xl border border-amber-100/50 active:scale-95">
+        <span>Mlebu Jelajah Kutha</span>
+        <span class="text-lg">➔</span>
+      </a>
+    </div>
+
+  </main>
+
+  <!-- ================= SCRIPT TYPEWRITER KHUSUS INDEX.HTML ================= -->
+  <script>
+    const sentences = [
+      "Rasakake hawa adhem lereng Merbabu lan segering sumber banyu alami.",
+      "Nresep tentreme kutha pungkasan ing sikil Gunung Merbabu.",
+      "Cicipi angete wedang ronde pasar lan tumpang koyor legendaris.",
+      "Pinarak kanthi tentrem, temokake sudut-sudut kaendahan Salatiga."
+    ];
+
+    const typedTextElement = document.getElementById("typed-text");
+    
+    let sentenceIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    
+    const typingSpeed = 50;      // Kecepatan ketik per huruf
+    const deletingSpeed = 22;    // Kecepatan hapus per huruf
+    const pauseDelay = 2300;     // Waktu jeda membaca kalimat
+
+    function typeEffect() {
+      const currentSentence = sentences[sentenceIndex];
+
+      if (!isDeleting) {
+        typedTextElement.textContent = currentSentence.substring(0, charIndex + 1);
+        charIndex++;
+
+        if (charIndex === currentSentence.length) {
+          isDeleting = true;
+          setTimeout(typeEffect, pauseDelay);
+          return;
+        }
+      } else {
+        typedTextElement.textContent = currentSentence.substring(0, charIndex - 1);
+        charIndex--;
+
+        if (charIndex === 0) {
+          isDeleting = false;
+          sentenceIndex = (sentenceIndex + 1) % sentences.length;
+        }
+      }
+
+      const speed = isDeleting ? deletingSpeed : typingSpeed;
+      setTimeout(typeEffect, speed);
+    }
+
+    // Memulai efek typing setelah judul selesai muncul
+    window.addEventListener("DOMContentLoaded", () => {
+      setTimeout(typeEffect, 900);
+    });
+  </script>
+
+</body>
+</html>

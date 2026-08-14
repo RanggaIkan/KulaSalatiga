@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KulaSalatiga - Katalog 9 Sudut Wisata & Kuliner</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="min-h-screen relative pb-28">
+
+  <!-- ================= VIDEO BACKGROUND FIXED ================= -->
+  <div class="video-bg-container">
+    <video autoplay muted loop playsinline>
+      <source src="pawon.mp4" type="video/mp4" />
+    </video>
+  </div>
+  <div class="video-overlay"></div>
+
+  <!-- TOP BANNER -->
+  <div class="bg-[#07130c]/90 text-[#d4a373] text-[11px] sm:text-xs py-2 px-4 text-center font-bold tracking-widest uppercase border-b border-[#d4a373]/30 flex items-center justify-center gap-3">
+    <span>❖</span>
+    <span>Sugeng Rawuh ing Kutha Salatiga — Kota Sejuk Lereng Merbabu</span>
+    <span>❖</span>
+  </div>
+
+  <!-- NAVBAR GLASS -->
+  <nav class="bg-[#07130c]/80 backdrop-blur-md border-b-2 border-[#d4a373]/50 sticky top-0 z-30 px-6 sm:px-10 py-3.5 shadow-lg">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      
+      <!-- LOGO -->
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#1b4332] to-[#07130c] flex items-center justify-center text-white text-xl shadow-md border border-[#d4a373] group-hover:scale-105 transition-transform">
+          🌿
+        </div>
+        <div>
+          <span class="text-xl font-extrabold tracking-tight text-[#faedcd] block font-heritage leading-tight">KulaSalatiga</span>
+          <span class="text-[10px] text-[#d4a373] font-bold tracking-widest uppercase block -mt-0.5">Katalog Wisata Lokal</span>
+        </div>
+      </a>
+      
+      <!-- MENU NAVIGASI -->
+      <div class="hidden md:flex items-center gap-2 bg-[#07130c]/60 border border-[#d4a373]/40 p-1.5 rounded-2xl">
+        <a href="index.html" class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-[#faedcd] hover:bg-[#1b4332] transition-all">Home</a>
+        <button onclick="filterCategory('all', event)" class="nav-item px-3.5 py-1.5 rounded-xl text-xs font-bold text-[#faedcd] hover:bg-[#1b4332] transition-all active-nav">
+          Semua (9)
+        </button>
+        <button onclick="filterCategory('alam', event)" class="nav-item px-3.5 py-1.5 rounded-xl text-xs font-bold text-[#faedcd] hover:bg-[#1b4332] transition-all">
+          🌿 Spot Alam (3)
+        </button>
+        <button onclick="filterCategory('kuliner', event)" class="nav-item px-3.5 py-1.5 rounded-xl text-xs font-bold text-[#faedcd] hover:bg-[#1b4332] transition-all">
+          🥣 Kuliner Khas (3)
+        </button>
+        <button onclick="filterCategory('underrated', event)" class="nav-item px-3.5 py-1.5 rounded-xl text-xs font-bold text-[#faedcd] hover:bg-[#bc4749] transition-all">
+          ✨ Hidden Gems (3)
+        </button>
+        <a href="chat.html" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-[#bc4749] text-white hover:opacity-90 transition-all flex items-center gap-1 shadow-sm">
+          <span>Full Chat AI</span>
+          <span class="text-[10px]">↗</span>
+        </a>
+      </div>
+
+      <!-- TOMBOL TANYA PEMANDU -->
+      <button onclick="toggleChat()" class="bg-gradient-to-r from-[#bc4749] to-[#8b263e] hover:from-[#a7383a] text-white font-bold text-xs sm:text-sm px-4 sm:px-5 py-2.5 rounded-2xl shadow-lg shadow-[#bc4749]/30 transition-all flex items-center gap-2 active:scale-95 border border-[#fdf8f0]/20">
+        <span>💬</span>
+        <span>Tanya Pemandu</span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <header class="max-w-5xl mx-auto px-6 pt-12 pb-6 text-center">
+    <div class="inline-flex items-center gap-2 bg-[#07130c]/80 border border-[#d4a373] text-[#faedcd] text-xs font-bold px-4 py-1.5 rounded-full mb-4 shadow-md backdrop-blur-sm">
+      <span>🌿</span>
+      <span>Kutha Paling Asri ing Jawa Tengah</span>
+    </div>
+    <h1 class="hero-title-reveal text-3xl sm:text-5xl font-extrabold text-[#faedcd] tracking-tight font-heritage leading-tight drop-shadow-md">
+      Pinarak & Jelajah Sudut Sejuk
+    </h1>
+    <p class="text-[#faedcd]/80 text-sm sm:text-base mt-3 max-w-2xl mx-auto leading-relaxed">
+      Kumpulan destinasi terlengkap: dari mata air murni perbukitan, racikan kuliner legendaris turun-temurun, hingga <i>hidden gems</i> tersembunyi.
+    </p>
+
+    <!-- SEARCH BAR & FILTER INTERAKTIF -->
+    <div class="mt-8 max-w-xl mx-auto flex flex-col gap-3">
+      <div class="relative">
+        <input 
+          type="text" 
+          id="search-input" 
+          onkeyup="searchSpot()" 
+          placeholder="Cari tempat wisata, soto, ronde, atau hidden gems..." 
+          class="w-full bg-[#07130c]/80 border-2 border-[#d4a373]/60 text-[#fdf8f0] text-sm rounded-2xl px-5 py-3.5 pl-11 focus:outline-none focus:ring-2 focus:ring-[#d4a373] focus:border-[#d4a373] shadow-md backdrop-blur-md transition-all placeholder:text-[#faedcd]/40"
+        />
+        <span class="absolute left-4 top-3.5 text-base text-[#d4a373]">🔍</span>
+      </div>
+
+      <!-- Kategori Chips Interaktif -->
+      <div class="flex items-center justify-center gap-2 overflow-x-auto no-scrollbar py-1 text-xs font-bold">
+        <button onclick="filterCategory('all', event)" class="filter-pill active-pill bg-[#1b4332] text-[#faedcd] border border-[#d4a373] px-4 py-2 rounded-xl transition-all shadow-sm">Semua (9)</button>
+        <button onclick="filterCategory('alam', event)" class="filter-pill bg-[#07130c]/70 text-[#faedcd] border border-[#d4a373]/50 hover:bg-[#1b4332] px-4 py-2 rounded-xl transition-all shadow-sm">🌿 Alam & Tuk (3)</button>
+        <button onclick="filterCategory('kuliner', event)" class="filter-pill bg-[#07130c]/70 text-[#faedcd] border border-[#d4a373]/50 hover:bg-[#1b4332] px-4 py-2 rounded-xl transition-all shadow-sm">🥣 Kuliner Khas (3)</button>
+        <button onclick="filterCategory('underrated', event)" class="filter-pill bg-[#07130c]/70 text-[#faedcd] border border-[#d4a373]/50 hover:bg-[#1b4332] px-4 py-2 rounded-xl transition-all shadow-sm">✨ Hidden Gems (3)</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- KATALOG DAFTAR DESTINASI (9 CARDS GLASS) -->
+  <main class="max-w-6xl mx-auto px-6 mt-8">
+    <div id="destinasi-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+
+      <!-- 1. ALAM: SENJOYO -->
+      <div class="spot-card spot-card-glass rounded-3xl overflow-hidden flex flex-col group" data-category="alam">
+        <div class="h-52 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=600&q=80" alt="Mata Air Senjoyo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <span class="absolute top-3 left-3 bg-[#07130c]/90 text-[#faedcd] border border-[#d4a373]/50 text-[11px] font-bold px-3 py-1 rounded-full shadow-sm backdrop-blur-sm">🌿 Mata Air Alami</span>
+          <span class="absolute top-3 right-3 bg-[#1b4332] text-[#faedcd] border border-[#d4a373]/40 text-[11px] font-bold px-2.5 py-1 rounded-full">Gratis</span>
+          <div class="absolute bottom-2 left-3 bg-black/60 backdrop-blur-sm text-amber-300 text-[11px] font-semibold px-2 py-0.5 rounded-lg flex items-center gap-1">
+            <span>⭐ 4.8</span> <span class="text-white/80 font-normal">(1.4k Ulasan)</span>
+          </div>
+        </div>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[11px] text-[#d4a373] font-semibold mb-1">
+              <span>⏰ 06.00 - 17.30 WIB</span>
+              <span>📍 Tingkir, Salatiga</span>
+            </div>
+            <h3 class="font-bold text-lg text-[#faedcd] font-heritage leading-snug">Mata Air Senjoyo</h3>
+            <p class="text-xs text-[#faedcd]/80 mt-2 leading-relaxed">Pemandian sumber mata air jernih dengan pohon beringin raksasa ratusan tahun dan ribuan ikan jinak yang bisa diajak berenang.</p>
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              <span class="text-[10px] bg-[#07130c]/80 text-[#d4a373] border border-[#d4a373]/30 px-2 py-0.5 rounded-md font-medium">Berenang Alami</span>
+              <span class="text-[10px] bg-[#07130c]/80 text-[#d4a373] border border-[#d4a373]/30 px-2 py-0.5 rounded-md font-medium">Spot Keluarga</span>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-[#d4a373]/30 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-[#faedcd]/60 block leading-tight">Parkir</span>
+              <span class="text-xs font-bold text-[#faedcd]">Rp 3.000 - 5.000</span>
+            </div>
+            <button onclick="askAI('Info tiket, waktu terbaik renang bersama ikan, dan rute ke Mata Air Senjoyo Salatiga')" class="bg-[#1b4332] hover:bg-[#2d6a4f] text-[#faedcd] border border-[#d4a373]/50 text-xs font-bold px-3.5 py-2 rounded-xl transition-all shadow-sm">Tanya AI</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. ALAM: POHON PENGANTIN -->
+      <div class="spot-card spot-card-glass rounded-3xl overflow-hidden flex flex-col group" data-category="alam">
+        <div class="h-52 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80" alt="Pohon Pengantin" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <span class="absolute top-3 left-3 bg-[#07130c]/90 text-[#faedcd] border border-[#d4a373]/50 text-[11px] font-bold px-3 py-1 rounded-full shadow-sm backdrop-blur-sm">🌾 Sawah & Senja</span>
+          <span class="absolute top-3 right-3 bg-[#d4a373] text-[#07130c] text-[11px] font-extrabold px-2.5 py-1 rounded-full">Spot Senja</span>
+          <div class="absolute bottom-2 left-3 bg-black/60 backdrop-blur-sm text-amber-300 text-[11px] font-semibold px-2 py-0.5 rounded-lg flex items-center gap-1">
+            <span>⭐ 4.7</span> <span class="text-white/80 font-normal">(850 Ulasan)</span>
+          </div>
+        </div>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[11px] text-[#d4a373] font-semibold mb-1">
+              <span>⏰ 16.00 - 18.00 (Golden Hour)</span>
+              <span>📍 Pulutan, Sidorejo</span>
+            </div>
+            <h3 class="font-bold text-lg text-[#faedcd] font-heritage leading-snug">Pohon Pengantin Pulutan</h3>
+            <p class="text-xs text-[#faedcd]/80 mt-2 leading-relaxed">Pohon tunggal artistik di pematang sawah hijau dengan panorama siluet Gunung Merbabu saat matahari terbenam.</p>
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              <span class="text-[10px] bg-[#07130c]/80 text-[#d4a373] border border-[#d4a373]/30 px-2 py-0.5 rounded-md font-medium">Fotografi</span>
+              <span class="text-[10px] bg-[#07130c]/80 text-[#d4a373] border border-[#d4a373]/30 px-2 py-0.5 rounded-md font-medium">Sunset Merbabu</span>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-[#d4a373]/30 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-[#faedcd]/60 block leading-tight">Biaya</span>
+              <span class="text-xs font-bold text-[#faedcd]">Gratis / Sukarela</span>
+            </div>
+            <button onclick="askAI('Mitos romantis dan tips foto golden hour di Pohon Pengantin Salatiga')" class="bg-[#1b4332] hover:bg-[#2d6a4f] text-[#faedcd] border border-[#d4a373]/50 text-xs font-bold px-3.5 py-2 rounded-xl transition-all shadow-sm">Tanya AI</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. ALAM: PEMANDIAN KALITAMAN -->
+      <div class="spot-card spot-card-glass rounded-3xl overflow-hidden flex flex-col group" data-category="alam">
+        <div class="h-52 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=600&q=80" alt="Pemandian Kalitaman" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <span class="absolute top-3 left-3 bg-[#07130c]/90 text-[#faedcd] border border-[#d4a373]/50 text-[11px] font-bold px-3 py-1 rounded-full shadow-sm backdrop-blur-sm">🏛️ Kolam Heritage</span>
+          <span class="absolute top-3 right-3 bg-[#1b4332] text-[#faedcd] border border-[#d4a373]/40 text-[11px] font-bold px-2.5 py-1 rounded-full">Rp 5.000</span>
+          <div class="absolute bottom-2 left-3 bg-black/60 backdrop-blur-sm text-amber-300 text-[11px] font-semibold px-2 py-0.5 rounded-lg flex items-center gap-1">
+            <span>⭐ 4.6</span> <span class="text-white/80 font-normal">(920 Ulasan)</span>
+          </div>
+        </div>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[11px] text-[#d4a373] font-semibold mb-1">
+              <span>⏰ 05.00 - 17.00 WIB</span>
+              <span>📍 Sidorejo Lor</span>
+            </div>
+            <h3 class="font-bold text-lg text-[#faedcd] font-heritage leading-snug">Taman Pemandian Kalitaman</h3>
+            <p class="text-xs text-[#faedcd]/80 mt-2 leading-relaxed">Kolam renang bersejarah di pusat kota dengan sirkulasi air mata air alami tanpa kaporit yang dingin dan segar.</p>
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              <span class="text-[10px] bg-[#07130c]/80 text-[#d4a373] border border-[#d4a373]/30 px-2 py-0.5 rounded-md font-medium">Bebas Kaporit</span>
+              <span class="text-[10px] bg-[#07130c]/80 text-[#d4a373] border border-[#d4a373]/30 px-2 py-0.5 rounded-md font-medium">Olahraga Pagi</span>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-[#d4a373]/30 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-[#faedcd]/60 block leading-tight">Tiket Masuk</span>
+              <span class="text-xs font-bold text-[#faedcd]">Rp 5.000 / orang</span>
+            </div>
+            <button onclick="askAI('Info tiket, kedalaman kolam, dan fasilitas di Pemandian Kalitaman Salatiga')" class="bg-[#1b4332] hover:bg-[#2d6a4f] text-[#faedcd] border border-[#d4a373]/50 text-xs font-bold px-3.5 py-2 rounded-xl transition-all shadow-sm">Tanya AI</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. KULINER: RONDE JAGO -->
+      <div class="spot-card spot-card-glass rounded-3xl overflow-hidden flex flex-col group" data-category="kuliner">
+        <div class="h-52 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=600&q=80" alt="Wedang Ronde Jago" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <span class="absolute top-3 left-3 bg-[#07130c]/90 text-[#bc4749] border border-[#bc4749]/50 text-[11px] font-bold px-3 py-1 rounded-full shadow-sm backdrop-blur-sm">🥣 Wedang Hangat</span>
+          <span class="absolute top-3 right-3 bg-[#bc4749] text-white text-[11px] font-bold px-2.5 py-1 rounded-full">Legendaris 1964</span>
+          <div class="absolute bottom-2 left-3 bg-black/60 backdrop-blur-sm text-amber-300 text-[11px] font-semibold px-2 py-0.5 rounded-lg flex items-center gap-1">
+            <span>⭐ 4.9</span> <span class="text-white/80 font-normal">(3.2k Ulasan)</span>
+          </div>
+        </div>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[11px] text-[#d4a373] font-semibold mb-1">
+              <span>⏰ 13.00 - 21.30 WIB</span>
+              <span>📍 Kompleks Pasar Raya</span>
+            </div>
+            <h3 class="font-bold text-lg text-[#faedcd] font-heritage leading-snug">Wedang Ronde Jago</h3>
+            <p class="text-xs text-[#faedcd]/80 mt-2 leading-relaxed">Racikan kuah jahe wangi penghangat malam dengan bulatan ronde sekoteng, kacang gurih, dan kulit jeruk kering.</p>
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              <span class="text-[10px] bg-[#07130c]/80 text-[#d4a373] border border-[#d4a373]/30 px-2 py-0.5 rounded-md font-medium">Ronde Sekoteng</span>
+              <span class="text-[10px] bg-[#07130c]/80 text-[#d4a373] border border-[#d4a373]/30 px-2 py-0.5 rounded-md font-medium">Ronde Kering</span>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-[#d4a373]/30 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-[#faedcd]/60 block leading-tight">Harga Mulai</span>
+              <span class="text-xs font-bold text-[#f4a261]">Rp 10.000 - 18.000</span>
+            </div>
+            <button onclick="askAI('Daftar menu lengkap di Ronde Jago Salatiga dan rekomendasinya')" class="bg-[#bc4749] hover:bg-[#8b263e] text-white text-xs font-bold px-3.5 py-2 rounded-xl transition-all shadow-sm">Tanya AI</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. KULINER: TUMPANG KOYOR MBAH UNGGUNG -->
+      <div class="spot-card spot-card-glass rounded-3xl overflow-hidden flex flex-col group" data-category="kuliner">
+        <div class="h-52 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80" alt="Tumpang Koyor" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <span class="absolute top-3 left-3 bg-[#07130c]/90 text-[#f4a261] border border-[#d4a373]/50 text-[11px] font-bold px-3 py-1 rounded-full shadow-sm backdrop-blur-sm">🍛 Sarapan Khas</span>
+          <span class="absolute top-3 right-3 bg-[#d4a373] text-[#07130c] text-[11px] font-extrabold px-2.5 py-1 rounded-full">Khas Otentik</span>
+          <div class="absolute bottom-2 left-3 bg-black/60 backdrop-blur-sm text-amber-300 text-[11px] font-semibold px-2 py-0.5 rounded-lg flex items-center gap-1">
+            <span>⭐ 4.8</span> <span class="text-white/80 font-normal">(1.8k Ulasan)</span>
+          </div>
+        </div>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[11px] text-[#d4a373] font-semibold mb-1">
+              <span>⏰ 06.00 - 13.00 WIB</span>
+              <span>📍 Jl. Nakula Sadewa</span>
+            </div>
+            <h3 class="font-bold text-lg text-[#faedcd] font-heritage leading-snug">Tumpang Koyor Mbah Unggung</h3>
+            <p class="text-xs text-[#faedcd]/80 mt-2 leading-relaxed">Kuah sambal tempe semangit gurih berempah dengan potongan koyor (urat sapi) tebal yang dimasak hingga lembut lumer.</p>
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              <span class="text-[10px] bg-[#07130c]/80 text-[#d4a373] border border-[#d4a373]/30 px-2 py-0.5 rounded-md font-medium">Koyor Sapi Empuk</span>
+              <span class="text-[10px] bg-[#07130c]/80 text-[#d4a373] border border-[#d4a373]/30 px-2 py-0.5 rounded-md font-medium">Tempe Semangit</span>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-[#d4a373]/30 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-[#faedcd]/60 block leading-tight">Harga Porsi</span>
+              <span class="text-xs font-bold text-[#f4a261]">Rp 15.000 - 30.000</span>
+            </div>
+            <button onclick="askAI('Rekomendasi porsi sarapan Tumpang Koyor Mbah Unggung Salatiga dan tips datangnya')" class="bg-[#1b4332] hover:bg-[#2d6a4f] text-[#faedcd] border border-[#d4a373]/50 text-xs font-bold px-3.5 py-2 rounded-xl transition-all shadow-sm">Tanya AI</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. KULINER: SATE SAPI SURUH -->
+      <div class="spot-card spot-card-glass rounded-3xl overflow-hidden flex flex-col group" data-category="kuliner">
+        <div class="h-52 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80" alt="Sate Sapi Suruh" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <span class="absolute top-3 left-3 bg-[#07130c]/90 text-[#bc4749] border border-[#bc4749]/50 text-[11px] font-bold px-3 py-1 rounded-full shadow-sm backdrop-blur-sm">🍢 Sate Daging Sapi</span>
+          <span class="absolute top-3 right-3 bg-[#bc4749] text-white text-[11px] font-bold px-2.5 py-1 rounded-full">Favorit Turis</span>
+          <div class="absolute bottom-2 left-3 bg-black/60 backdrop-blur-sm text-amber-300 text-[11px] font-semibold px-2 py-0.5 rounded-lg flex items-center gap-1">
+            <span>⭐ 4.8</span> <span class="text-white/80 font-normal">(2.1k Ulasan)</span>
+          </div>
+        </div>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[11px] text-[#d4a373] font-semibold mb-1">
+              <span>⏰ 10.00 - 21.30 WIB</span>
+              <span>📍 Jl. Jend. Sudirman</span>
+            </div>
+            <h3 class="font-bold text-lg text-[#faedcd] font-heritage leading-snug">Sate Sapi Suruh</h3>
+            <p class="text-xs text-[#faedcd]/80 mt-2 leading-relaxed">Potongan daging sapi tanpa lemak yang dimarinasi rempah manis gurih, disajikan dengan bumbu kacang lembut dan lontong.</p>
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              <span class="text-[10px] bg-[#07130c]/80 text-[#d4a373] border border-[#d4a373]/30 px-2 py-0.5 rounded-md font-medium">Bumbu Rempah Manis</span>
+              <span class="text-[10px] bg-[#07130c]/80 text-[#d4a373] border border-[#d4a373]/30 px-2 py-0.5 rounded-md font-medium">Daging Empuk</span>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-[#d4a373]/30 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-[#faedcd]/60 block leading-tight">Harga / 10 Tusuk</span>
+              <span class="text-xs font-bold text-[#f4a261]">Rp 35.000 - 50.000</span>
+            </div>
+            <button onclick="askAI('Harga satu porsi Sate Sapi Suruh dan menu kuah yang enak di sana')" class="bg-[#bc4749] hover:bg-[#8b263e] text-white text-xs font-bold px-3.5 py-2 rounded-xl transition-all shadow-sm">Tanya AI</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. HIDDEN GEMS: GETHUK KETHEK -->
+      <div class="spot-card spot-card-glass rounded-3xl overflow-hidden flex flex-col group" data-category="underrated">
+        <div class="h-52 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80" alt="Gethuk Kethek" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <span class="absolute top-3 left-3 bg-[#07130c]/90 text-[#faedcd] border border-[#d4a373]/50 text-[11px] font-bold px-3 py-1 rounded-full shadow-sm backdrop-blur-sm">✨ Hidden Gem Kuliner</span>
+          <span class="absolute top-3 right-3 bg-[#d4a373] text-[#07130c] text-[11px] font-extrabold px-2.5 py-1 rounded-full">Lumer Hangat</span>
+          <div class="absolute bottom-2 left-3 bg-black/60 backdrop-blur-sm text-amber-300 text-[11px] font-semibold px-2 py-0.5 rounded-lg flex items-center gap-1">
+            <span>⭐ 4.9</span> <span class="text-white/80 font-normal">(1.1k Ulasan)</span>
+          </div>
+        </div>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[11px] text-[#d4a373] font-semibold mb-1">
+              <span>⏰ 07.30 - 15.00 (Cepat Habis)</span>
+              <span>📍 Jl. Argotunggal</span>
+            </div>
+            <h3 class="font-bold text-lg text-[#faedcd] font-heritage leading-snug">Gethuk Kethek Salatiga</h3>
+            <p class="text-xs text-[#faedcd]/80 mt-2 leading-relaxed">Olahan singkong kukus super lembut dan lumer tanpa pengawet, ditaburi parutan kelapa gurih segar. Wajib pesan sebelum jam 1 siang!</p>
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              <span class="text-[10px] bg-[#07130c]/80 text-[#d4a373] border border-[#d4a373]/30 px-2 py-0.5 rounded-md font-medium">Oleh-oleh Alami</span>
+              <span class="text-[10px] bg-[#07130c]/80 text-[#d4a373] border border-[#d4a373]/30 px-2 py-0.5 rounded-md font-medium">Singkong Lumer</span>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-[#d4a373]/30 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-[#faedcd]/60 block leading-tight">Harga / Kotak</span>
+              <span class="text-xs font-bold text-[#f4a261]">Rp 17.000 - 25.000</span>
+            </div>
+            <button onclick="askAI('Tips beli Gethuk Kethek Salatiga agar dapat yang fresh dan hangat')" class="bg-[#1b4332] hover:bg-[#2d6a4f] text-[#faedcd] border border-[#d4a373]/50 text-xs font-bold px-3.5 py-2 rounded-xl transition-all shadow-sm">Tanya AI</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. HIDDEN GEMS: SOTO ESTO KARAK -->
+      <div class="spot-card spot-card-glass rounded-3xl overflow-hidden flex flex-col group" data-category="underrated">
+        <div class="h-52 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80" alt="Soto Esto Kuah Santan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <span class="absolute top-3 left-3 bg-[#07130c]/90 text-[#faedcd] border border-[#d4a373]/50 text-[11px] font-bold px-3 py-1 rounded-full shadow-sm backdrop-blur-sm">✨ Soto Santan Khas</span>
+          <span class="absolute top-3 right-3 bg-[#1b4332] text-[#faedcd] border border-[#d4a373]/40 text-[11px] font-bold px-2.5 py-1 rounded-full">Legendaris Bus Esto</span>
+          <div class="absolute bottom-2 left-3 bg-black/60 backdrop-blur-sm text-amber-300 text-[11px] font-semibold px-2 py-0.5 rounded-lg flex items-center gap-1">
+            <span>⭐ 4.8</span> <span class="text-white/80 font-normal">(1.6k Ulasan)</span>
+          </div>
+        </div>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[11px] text-[#d4a373] font-semibold mb-1">
+              <span>⏰ 06.00 - 12.00 WIB</span>
+              <span>📍 Jl. Langensuko</span>
+            </div>
+            <h3 class="font-bold text-lg text-[#faedcd] font-heritage leading-snug">Soto Esto Kerupuk Karak</h3>
+            <p class="text-xs text-[#faedcd]/80 mt-2 leading-relaxed">Soto ayam kuah santan kuning gurih dengan taburan suwiran ayam kampung dan kerupuk karak (nasi kering) yang renyah.</p>
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              <span class="text-[10px] bg-[#07130c]/80 text-[#d4a373] border border-[#d4a373]/30 px-2 py-0.5 rounded-md font-medium">Kuah Santan Kuning</span>
+              <span class="text-[10px] bg-[#07130c]/80 text-[#d4a373] border border-[#d4a373]/30 px-2 py-0.5 rounded-md font-medium">Kerupuk Karak</span>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-[#d4a373]/30 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-[#faedcd]/60 block leading-tight">Harga / Porsi</span>
+              <span class="text-xs font-bold text-[#f4a261]">Rp 14.000 - 22.000</span>
+            </div>
+            <button onclick="askAI('Kenapa dinamakan Soto Esto dan apa keunikan kerupuk karaknya?')" class="bg-[#1b4332] hover:bg-[#2d6a4f] text-[#faedcd] border border-[#d4a373]/50 text-xs font-bold px-3.5 py-2 rounded-xl transition-all shadow-sm">Tanya AI</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9. HIDDEN GEMS: JLS KAFE VIEW MERBABU -->
+      <div class="spot-card spot-card-glass rounded-3xl overflow-hidden flex flex-col group" data-category="underrated">
+        <div class="h-52 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=600&q=80" alt="Cafe JLS View Merbabu" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <span class="absolute top-3 left-3 bg-[#07130c]/90 text-[#faedcd] border border-[#d4a373]/50 text-[11px] font-bold px-3 py-1 rounded-full shadow-sm backdrop-blur-sm">✨ Spot Senja & Kopi</span>
+          <span class="absolute top-3 right-3 bg-[#1b4332] text-[#faedcd] border border-[#d4a373]/40 text-[11px] font-bold px-2.5 py-1 rounded-full">View 3 Gunung</span>
+          <div class="absolute bottom-2 left-3 bg-black/60 backdrop-blur-sm text-amber-300 text-[11px] font-semibold px-2 py-0.5 rounded-lg flex items-center gap-1">
+            <span>⭐ 4.8</span> <span class="text-white/80 font-normal">(740 Ulasan)</span>
+          </div>
+        </div>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[11px] text-[#d4a373] font-semibold mb-1">
+              <span>⏰ 14.00 - 22.00 WIB</span>
+              <span>📍 Jalur Lingkar Salatiga</span>
+            </div>
+            <h3 class="font-bold text-lg text-[#faedcd] font-heritage leading-snug">Kedai & Kafe Lereng JLS</h3>
+            <p class="text-xs text-[#faedcd]/80 mt-2 leading-relaxed">Deretan tempat ngopi outdoor di pinggir sawah dengan panorama Gunung Merbabu, Telomoyo, dan Gajah Mungkur berudara dingin.</p>
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              <span class="text-[10px] bg-[#07130c]/80 text-[#d4a373] border border-[#d4a373]/30 px-2 py-0.5 rounded-md font-medium">View Merbabu</span>
+              <span class="text-[10px] bg-[#07130c]/80 text-[#d4a373] border border-[#d4a373]/30 px-2 py-0.5 rounded-md font-medium">Kopi Tubruk & Tempe</span>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-[#d4a373]/30 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-[#faedcd]/60 block leading-tight">Harga Menu</span>
+              <span class="text-xs font-bold text-[#f4a261]">Rp 15.000 - 35.000</span>
+            </div>
+            <button onclick="askAI('Rekomendasi kafe di Jalur Lingkar Salatiga (JLS) dengan view sunset paling bagus')" class="bg-[#1b4332] hover:bg-[#2d6a4f] text-[#faedcd] border border-[#d4a373]/50 text-xs font-bold px-3.5 py-2 rounded-xl transition-all shadow-sm">Tanya AI</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ================= FLOATING CHAT WIDGET POPUP ================= -->
+  <div id="chat-widget" class="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 w-[calc(100%-2rem)] sm:w-full max-w-sm sm:max-w-md bg-[#0d2818]/95 backdrop-blur-xl rounded-3xl shadow-2xl border-2 border-[#d4a373] flex flex-col h-[520px] max-h-[85vh] overflow-hidden z-50 transition-all duration-300 text-[#fdf8f0] hidden">
+    
+    <header class="bg-[#07130c] p-3 sm:p-3.5 text-[#fdf8f0] flex items-center justify-between shadow-md border-b border-[#d4a373]/40">
+      <div class="flex items-center gap-2 sm:gap-2.5">
+        <div class="w-8 h-8 rounded-xl bg-[#d4a373]/20 border border-[#d4a373] flex items-center justify-center text-sm">🌿</div>
+        <div>
+          <h1 class="font-bold text-xs sm:text-sm leading-tight font-heritage text-[#faedcd]">Sobat Salatiga AI</h1>
+          <p class="text-[10px] text-emerald-300 flex items-center gap-1 mt-0.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            Siap nyambut pitakonanmu
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-1.5 sm:gap-2">
+        <!-- Tombol Reset Sesi di Floating Widget -->
+        <button
+          type="button"
+          id="reset-chat-btn"
+          class="text-[10px] bg-[#bc4749]/80 hover:bg-[#bc4749] border border-[#fdf8f0]/40 px-2 py-1 rounded-lg text-[#fdf8f0] font-bold transition-all flex items-center gap-0.5"
+          title="Reset Sesi Obrolan"
+        >
+          <span>🔄</span>
+        </button>
+
+        <a href="chat.html" class="text-[10px] sm:text-[11px] bg-[#d4a373]/20 hover:bg-[#d4a373]/40 border border-[#d4a373]/50 px-2 sm:px-2.5 py-1 rounded-lg text-[#faedcd] font-semibold transition-colors">Layar Penuh ↗</a>
+        <button onclick="toggleChat()" class="text-white/80 hover:text-white text-xl font-bold px-1.5">&times;</button>
+      </div>
+    </header>
+
+    <div id="chat-box" class="flex-1 p-3 sm:p-3.5 overflow-y-auto space-y-3 bg-[#07130c]/70 scroll-smooth">
+      <div class="flex items-start gap-2 message-bot">
+        <div class="w-7 h-7 rounded-full bg-[#1b4332] text-white flex items-center justify-center text-xs shrink-0 shadow-sm border border-[#d4a373]">🌿</div>
+        <div class="bg-[#0d2818] border border-[#d4a373]/50 text-[#faedcd] p-3 sm:p-3.5 rounded-2xl rounded-tl-sm max-w-[85%] shadow-sm text-xs leading-relaxed">
+          Sugeng rawuh! Aku <b>Sobat Salatiga</b> 🌿. Mau tanya rekomendasi tuk mata air sejuk, ronde hangat pasar, atau gethuk lumer? Tulis aja pertanyaannya!
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Chips -->
+    <div class="px-3 py-1.5 bg-[#07130c]/90 border-t border-[#d4a373]/30 flex gap-1.5 overflow-x-auto no-scrollbar text-[11px]">
+      <button type="button" class="quick-chip bg-[#0d2818] hover:bg-[#1b4332] text-[#faedcd] border border-[#d4a373]/60 px-3 py-1 rounded-full whitespace-nowrap transition-all shadow-sm font-semibold">
+        🥣 Ronde Jago & Koyor
+      </button>
+      <button type="button" class="quick-chip bg-[#0d2818] hover:bg-[#1b4332] text-[#faedcd] border border-[#d4a373]/60 px-3 py-1 rounded-full whitespace-nowrap transition-all shadow-sm font-semibold">
+        🌿 1 Hari Rute Sejuk Senjoyo
+      </button>
+    </div>
+
+    <!-- Chat Form Input -->
+    <div class="p-2.5 sm:p-3 bg-[#07130c] border-t border-[#d4a373]/40">
+      <form id="chat-form" class="flex items-center gap-1.5 sm:gap-2">
+        <input 
+          type="text" 
+          id="user-input" 
+          placeholder="Tanya seputar Salatiga..." 
+          class="flex-1 bg-[#0d2818] border border-[#d4a373]/60 text-[#faedcd] placeholder:text-[#faedcd]/40 text-xs rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#d4a373] transition-all" 
+          autocomplete="off" 
+        />
+        <button type="submit" id="send-btn" class="bg-[#d4a373] hover:bg-[#e9c46a] text-[#07130c] font-bold px-3.5 sm:px-4 py-2.5 rounded-xl text-xs shadow-md transition-all active:scale-95 disabled:opacity-50">Kirim</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FLOATING MINIMIZED BUTTON -->
+  <button id="chat-toggle-btn" onclick="toggleChat()" class="fixed bottom-5 right-5 w-14 h-14 rounded-full bg-gradient-to-tr from-[#1b4332] to-[#582f0e] text-[#faedcd] text-2xl shadow-2xl flex items-center justify-center hover:scale-105 active:scale-95 transition-all z-40 border-2 border-[#d4a373]">
+    💬
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>

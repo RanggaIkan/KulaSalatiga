@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cinzel:wght@700;900&display=swap');
+
+:root {
+  --color-merbabu: #0f2d1e;
+  --color-terakota: #bc4749;
+  --color-jati: #3a1e05;
+  --color-kuningan: #d4a373;
+  --color-kuningan-glow: #f4a261;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #07130c;
+  color: #fdf8f0;
+  overflow-x: hidden;
+}
+
+.font-heritage {
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.04em;
+}
+
+/* ================= VIDEO BACKGROUND FIXED ================= */
+.video-bg-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -2;
+}
+
+.video-bg-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.85) contrast(1.15) saturate(1.1);
+}
+
+.video-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(15, 45, 30, 0.15) 0%, rgba(7, 19, 12, 0.55) 100%),
+              linear-gradient(to bottom, rgba(7, 19, 12, 0.1) 0%, rgba(7, 19, 12, 0.65) 100%);
+  z-index: -1;
+}
+
+/* ================= KARTU GLASSMORPHISM NUSANTARA ================= */
+.spot-card-glass {
+  background: rgba(15, 45, 30, 0.45);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(212, 163, 115, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: cardFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.spot-card-glass:hover {
+  transform: translateY(-6px);
+  border-color: rgba(244, 162, 97, 0.85);
+  box-shadow: 0 16px 40px rgba(212, 163, 115, 0.25);
+}
+
+@keyframes cardFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animasi Focus Reveal Judul */
+.hero-title-reveal {
+  opacity: 0;
+  filter: blur(12px);
+  transform: translateY(-12px);
+  animation: revealHero 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+
+@keyframes revealHero {
+  to {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0px);
+  }
+}
+
+/* Custom Scrollbar Nuansa Kayu */
+#chat-box::-webkit-scrollbar {
+  width: 6px;
+}
+#chat-box::-webkit-scrollbar-track {
+  background: rgba(7, 19, 12, 0.5);
+}
+#chat-box::-webkit-scrollbar-thumb {
+  background: #c2a68c;
+  border-radius: 9999px;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Active State Filter Pill & Navbar */
+.active-nav {
+  background-color: #1b4332 !important;
+  color: #faedcd !important;
+  border-color: #d4a373 !important;
+  box-shadow: 0 2px 10px rgba(212, 163, 115, 0.3);
+}
+
+/* Animasi Muncul Bubble Chat */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.message-user, .message-bot {
+  animation: fadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Styling Markdown AI */
+.bot-content p { margin-bottom: 0.65rem; }
+.bot-content p:last-child { margin-bottom: 0; }
+.bot-content strong { font-weight: 700; color: #faedcd; }
+.bot-content ul, .bot-content ol { margin-left: 1.2rem; margin-bottom: 0.65rem; }
+.bot-content ul { list-style-type: disc; }
+.bot-content ol { list-style-type: decimal; }
+
+/* ================= TAMBAHAN KHUSUS RESPONSIF LAYAR HP ================= */
+@media (max-width: 640px) {
+  .chat-container-mobile {
+    height: 96dvh !important;
+    border-radius: 1.25rem !important;
+    margin: 0 !important;
+  }
+
+  #user-input {
+    font-size: 14px !important;
+  }
+
+  .spot-card-glass {
+    margin-bottom: 0.5rem;
+  }
+}

@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KulaSalatiga - Pawarta & Pemandu AI</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="min-h-screen flex items-center justify-center p-3 sm:p-6 text-[#2b2d42]">
+
+    <!-- Main Chat Container (Ditambahkan class 'chat-container-mobile' untuk kenyamanan layar HP) -->
+    <div class="w-full max-w-2xl bg-[#fdf8f0] rounded-3xl shadow-2xl flex flex-col h-[92vh] chat-container-mobile border-2 border-[#d4a373] overflow-hidden relative">
+      
+      <!-- Top Pattern Bar -->
+      <div class="bg-[#1b4332] text-[#d4a373] text-[10px] sm:text-[11px] py-1.5 px-4 text-center font-bold tracking-widest uppercase border-b border-[#d4a373]/40 flex items-center justify-center gap-2">
+        <span>❖</span>
+        <span>Pawarta Digital Kutha Salatiga</span>
+        <span>❖</span>
+      </div>
+
+      <!-- Header Vintage Jawa -->
+      <header class="bg-gradient-to-r from-[#1b4332] via-[#24533e] to-[#2d6a4f] p-3 sm:p-5 text-[#fdf8f0] flex items-center justify-between shadow-md border-b-2 border-[#d4a373]/50">
+        <div class="flex items-center gap-2.5 sm:gap-3">
+          <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-2xl bg-[#d4a373]/20 backdrop-blur-md flex items-center justify-center text-xl sm:text-2xl shadow-inner border border-[#d4a373]">
+            🌿
+          </div>
+          <div>
+            <h1 class="font-bold text-base sm:text-lg leading-tight tracking-wide font-heritage text-[#fdf8f0]">
+              Sobat Salatiga AI
+            </h1>
+            <p class="text-[10px] sm:text-xs text-[#faedcd] flex items-center gap-1.5 mt-0.5 font-medium">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              Pemandu Wisata & Kuliner Lokal
+            </p>
+          </div>
+        </div>
+
+        <!-- Bagian Tombol Aksi Header -->
+        <div class="flex items-center gap-1.5 sm:gap-2">
+          <!-- [DITAMBAHKAN]: Tombol Reset / Sesi Baru -->
+          <button
+            type="button"
+            id="reset-chat-btn"
+            class="text-[11px] sm:text-xs bg-[#bc4749]/80 hover:bg-[#bc4749] border border-[#fdf8f0]/40 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl text-[#fdf8f0] font-bold transition-all flex items-center gap-1 shadow-sm active:scale-95"
+            title="Bersihkan riwayat & mulai sesi baru"
+          >
+            <span>🔄</span>
+            <span class="hidden sm:inline">Sesi Anyar</span>
+          </button>
+
+          <!-- Tombol Kembali ke Katalog -->
+          <a
+            href="salatiga.html"
+            class="text-[11px] sm:text-xs bg-[#d4a373]/20 hover:bg-[#d4a373]/40 border border-[#d4a373]/60 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-[#fdf8f0] font-bold transition-all flex items-center gap-1 shadow-sm active:scale-95"
+          >
+            <span>←</span>
+            <span class="hidden sm:inline">Katalog</span>
+          </a>
+        </div>
+      </header>
+
+      <!-- Chat Box -->
+      <div id="chat-box" class="flex-1 p-4 sm:p-6 overflow-y-auto space-y-4 bg-[#fdf8f0]/90 scroll-smooth">
+        
+        <!-- Welcome Message Bot -->
+        <div class="flex items-start gap-2.5 message-bot">
+          <div class="w-8 h-8 rounded-full bg-[#1b4332] text-white flex items-center justify-center text-sm shrink-0 shadow-sm border border-[#d4a373]">
+            🌿
+          </div>
+          <div class="bg-white border border-[#d4a373]/60 text-[#2b2d42] p-4 rounded-2xl rounded-tl-sm max-w-[85%] sm:max-w-[78%] shadow-sm text-xs sm:text-sm leading-relaxed">
+            <p class="font-bold text-[#1b4332] font-heritage mb-1.5 text-sm">
+              Sugeng rawuh! Halo lur! 🏛️
+            </p>
+            Aku <b>Sobat Salatiga</b> yang siap bantu cari info lengkap seputar Kota Salatiga: dari segarnya mata air alami (Senjoyo, Kalitaman), kuliner malam (Ronde Jago, Sate Sapi Suruh), sarapan tumpang koyor, sampai *hidden gems* tersembunyi.
+            <br /><br />
+            <span class="text-[#8c5835] font-semibold italic">Kamu bisa kirim foto makanan 📸, dokumen PDF 📄, atau rekaman suara 🎙️ buat aku analisis lho!</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Quick Prompt Chips -->
+      <div class="px-4 py-2.5 bg-[#faedcd]/40 border-t border-[#d4a373]/30 flex gap-2 overflow-x-auto no-scrollbar text-xs">
+        <button
+          type="button"
+          class="quick-chip bg-white hover:bg-[#faedcd] text-[#582f0e] hover:border-[#1b4332] border border-[#d4a373] px-3.5 py-1.5 rounded-xl whitespace-nowrap transition-all shadow-sm font-semibold flex items-center gap-1"
+        >
+          <span>🥣</span> Kuliner Malam Ronde Jago
+        </button>
+        <button
+          type="button"
+          class="quick-chip bg-white hover:bg-[#faedcd] text-[#582f0e] hover:border-[#1b4332] border border-[#d4a373] px-3.5 py-1.5 rounded-xl whitespace-nowrap transition-all shadow-sm font-semibold flex items-center gap-1"
+        >
+          <span>🌿</span> Rekomendasi Tuk / Mata Air Senjoyo
+        </button>
+        <button
+          type="button"
+          class="quick-chip bg-white hover:bg-[#faedcd] text-[#582f0e] hover:border-[#1b4332] border border-[#d4a373] px-3.5 py-1.5 rounded-xl whitespace-nowrap transition-all shadow-sm font-semibold flex items-center gap-1"
+        >
+          <span>✨</span> Hidden Gem Gethuk Kethek
+        </button>
+        <button
+          type="button"
+          class="quick-chip bg-white hover:bg-[#faedcd] text-[#582f0e] hover:border-[#1b4332] border border-[#d4a373] px-3.5 py-1.5 rounded-xl whitespace-nowrap transition-all shadow-sm font-semibold flex items-center gap-1"
+        >
+          <span>☕</span> Cafe Sejuk View Merbabu JLS
+        </button>
+      </div>
+
+      <!-- Input Form & Universal Attachment Bar -->
+      <div class="p-4 bg-white/95 border-t-2 border-[#d4a373]/40">
+        
+        <!-- File Preview Bar (Tampil Otomatis untuk Foto, Dokumen, atau Audio) -->
+        <div id="file-preview-container" class="hidden mb-3 p-2 bg-[#faedcd]/50 border border-[#d4a373] rounded-2xl flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div id="file-preview-icon" class="w-11 h-11 rounded-xl bg-[#1b4332] text-white flex items-center justify-center text-lg border border-[#d4a373]">
+              📸
+            </div>
+            <div class="text-xs">
+              <p id="file-name" class="font-bold text-[#1b4332] max-w-[200px] truncate">nama_file</p>
+              <p id="file-type-badge" class="text-[10px] text-[#8c5835]">Siap dianalisis Sobat Salatiga</p>
+            </div>
+          </div>
+          <button type="button" id="remove-file-btn" class="text-rose-500 hover:text-rose-700 font-bold text-lg px-2.5 py-1">&times;</button>
+        </div>
+
+        <form id="chat-form" class="flex items-center gap-2">
+          
+          <!-- 1. Tombol Upload Foto -->
+          <label for="image-input" class="cursor-pointer bg-[#faedcd] hover:bg-[#d4a373]/40 text-[#582f0e] border border-[#d4a373] p-2.5 sm:p-3 rounded-2xl flex items-center justify-center transition-all shadow-sm active:scale-95" title="Unggah Foto Kuliner/Wisata">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <input type="file" id="image-input" accept="image/*" class="hidden" />
+          </label>
+
+          <!-- 2. Tombol Upload Dokumen (PDF) -->
+          <label for="document-input" class="cursor-pointer bg-[#faedcd] hover:bg-[#d4a373]/40 text-[#582f0e] border border-[#d4a373] p-2.5 sm:p-3 rounded-2xl flex items-center justify-center transition-all shadow-sm active:scale-95" title="Unggah Dokumen Itinerary (PDF)">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <input type="file" id="document-input" accept=".pdf,application/pdf" class="hidden" />
+          </label>
+
+          <!-- 3. Tombol Upload Audio -->
+          <label for="audio-input" class="cursor-pointer bg-[#faedcd] hover:bg-[#d4a373]/40 text-[#582f0e] border border-[#d4a373] p-2.5 sm:p-3 rounded-2xl flex items-center justify-center transition-all shadow-sm active:scale-95" title="Unggah Rekaman Suara (Audio)">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+            </svg>
+            <input type="file" id="audio-input" accept="audio/*" class="hidden" />
+          </label>
+
+          <!-- Input Teks -->
+          <input
+            type="text"
+            id="user-input"
+            placeholder="Tulis pertanyaanmu atau instruksi file..."
+            class="flex-1 bg-[#fdf8f0] border-2 border-[#d4a373]/60 text-[#2b2d42] text-xs sm:text-sm rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1b4332] focus:border-[#1b4332] transition-all placeholder:text-[#582f0e]/50 font-medium"
+            autocomplete="off"
+          />
+
+          <!-- Tombol Kirim -->
+          <button
+            type="submit"
+            id="send-btn"
+            class="bg-gradient-to-r from-[#1b4332] to-[#2d6a4f] hover:from-[#143326] hover:to-[#22533e] text-[#fdf8f0] font-bold px-4 sm:px-5 py-3 rounded-2xl flex items-center justify-center gap-1.5 transition-all shadow-md shadow-[#1b4332]/25 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed border border-[#d4a373]/30"
+          >
+            <span class="text-xs sm:text-sm font-semibold hidden sm:inline">Kirim</span>
+            <svg class="w-4 h-4 transform rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
+          </button>
+        </form>
+      </div>
+
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
