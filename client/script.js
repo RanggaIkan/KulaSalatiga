@@ -234,9 +234,9 @@ if (chatForm) {
         formData.append(currentType, currentFile);
         formData.append('prompt', text || '');
 
-        let endpoint = 'http://localhost:3000/generate-from-image';
-        if (currentType === 'document') endpoint = 'http://localhost:3000/generate-from-document';
-        if (currentType === 'audio') endpoint = 'http://localhost:3000/generate-from-audio';
+        let endpoint = '/generate-from-image';
+        if (currentType === 'document') endpoint = '/generate-from-document';
+        if (currentType === 'audio') endpoint = '/generate-from-audio';
 
         response = await fetch(endpoint, {
           method: 'POST',
@@ -245,7 +245,7 @@ if (chatForm) {
       } else {
         conversationHistory.push({ role: 'user', text });
 
-        response = await fetch('http://localhost:3000/api/chat', {
+        response = await fetch('/api/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ conversation: conversationHistory }),
